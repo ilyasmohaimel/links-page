@@ -3,11 +3,12 @@ import { ProfileHeader } from './components/ProfileHeader';
 import { LinkRow } from './components/LinkRow';
 import { links } from './data/links';
 
+// Fix arrow placement by removing it from the top
 const iconMap: Record<string, string> = {
   Mail: "✉️",
   LockKeyhole: "🔒",
-  Instagram: "📷",
-  Github: "👤",
+  Instagram: "📸",
+  Github: "🐙",
   BadgeCheck: "🏆",
   MessageCircle: "💬",
   Globe: "🌐",
@@ -20,7 +21,7 @@ function App() {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
-      className="min-h-screen bg-[#F4F7F8] flex items-center justify-center p-4 relative overflow-hidden"
+      className="min-h-screen bg-page-bg flex items-center justify-center p-4 relative overflow-hidden"
     >
       {/* Background text for desktop */}
       <div className="absolute inset-0 hidden md:flex items-center justify-center pointer-events-none">
@@ -30,7 +31,7 @@ function App() {
       </div>
 
       {/* Phone-sized card */}
-      <div className="max-w-md w-full bg-white/80 backdrop-blur-sm border border-[#D5DEE3] rounded-3xl p-6 shadow-lg relative z-10">
+      <div className="max-w-md w-full bg-card-bg/80 backdrop-blur-sm border border-border-color rounded-3xl p-6 sm:p-8 shadow-lg relative z-10">
         <ProfileHeader />
         <div className="mt-6 space-y-3">
           {links.map((link) => {
@@ -46,7 +47,7 @@ function App() {
             );
           })}
         </div>
-        <footer className="mt-8 text-center text-sm text-[#4A5C6A]">
+        <footer className="mt-8 text-center text-sm text-text-secondary">
           Ilyas Mohaimel · Official Links
         </footer>
       </div>

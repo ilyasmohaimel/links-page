@@ -4,13 +4,20 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&display=swap');
 
+/* Force light mode colors */
+:root {
+  color-scheme: light;
+}
+
 body {
   font-family: 'Inter', sans-serif;
-  background-color: #F4F7F8;
+  background-color: #F4F7F8 !important;
   background-image:
     linear-gradient(to right, rgba(17, 33, 45, 0.06) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(17, 33, 45, 0.06) 1px, transparent 1px);
+    linear-gradient(to bottom, rgba(17, 33, 45, 0.06) 1px, transparent 1px) !important;
   background-size: 48px 48px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .condensed-font {
@@ -20,6 +27,15 @@ body {
 
 @media (max-width: 768px) {
   body {
-    background-image: none;
+    background-image: none !important;
   }
 }
+
+/* Force specific colors */
+.bg-page-bg { background-color: #F4F7F8 !important; }
+.bg-card-bg { background-color: #FFFFFF !important; }
+.border-border-color { border-color: #D5DEE3 !important; }
+.text-text-primary { color: #06141B !important; }
+.text-text-secondary { color: #4A5C6A !important; }
+.text-text-muted { color: #253745 !important; }
+.bg-cta-primary { background-color: #11212D !important; }
