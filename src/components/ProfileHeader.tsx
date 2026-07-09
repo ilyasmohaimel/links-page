@@ -1,80 +1,76 @@
-import { motion } from "framer-motion";
-import React from "react";
-import { CTAButton } from "./CTAButton";
+import { useState } from 'react'
+import { ArrowUpRight, Mail } from 'lucide-react'
+import { motion } from 'framer-motion'
+import CTAButton from './CTAButton'
 
-type ProfileHeaderProps = {
-  profileImage?: string;
-};
+const profileImage = '/assets/ilyas-camera.png'
 
-export const ProfileHeader: React.FC<ProfileHeaderProps> = ({ profileImage }) => {
+export default function ProfileHeader() {
+  const [imageLoaded, setImageLoaded] = useState(true)
+
   return (
-    <div className="flex flex-col items-center gap-6">
-      <div className="relative">
-        {profileImage ? (
-          <motion.img
+    <section aria-labelledby="profile-title" className="space-y-5">
+      <motion.div
+        className="overflow-hidden rounded-[10px] border border-[#D5DEE3] bg-[#E8EEF1]"
+        initial={{ opacity: 0, y: 16 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.48, ease: [0.22, 1, 0.36, 1] }}
+      >
+        {imageLoaded ? (
+          <img
             src={profileImage}
             alt="Ilyas Mohaimel holding a camera"
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5 }}
-            className="w-24 h-24 object-cover rounded-lg border border-[#D5DEE3]"
+            className="aspect-[1.75/1] w-full object-cover object-[50%_27%]"
+            onError={() => setImageLoaded(false)}
           />
         ) : (
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5 }}
-            className="w-24 h-24 bg-[#E8EEF1] border border-[#D5DEE3] rounded-lg flex items-center justify-center"
-          >
-            <span className="text-2xl font-bold text-[#253745]">IM</span>
-          </motion.div>
+          <div className="grid aspect-[1.75/1] place-items-center bg-[#E8EEF1] font-display text-7xl uppercase leading-none text-[#11212D]">
+            IM
+          </div>
         )}
-      </div>
-
-<div className="text-center">
-        <motion.p
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2, duration: 0.5 }}
-          className="text-xs text-[#4A5C6A] tracking-widest uppercase"
-        >
-          Official Links
-        </motion.p>
-        <motion.h1
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3, duration: 0.5 }}
-          className="text-5xl font-black text-[#06141B] tracking-tighter mt-2 condensed-font"
-        >
-          <div>ILYAS</div>
-          <div>MOHAIMEL</div>
-        </motion.h1>
-        <motion.p
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4, duration: 0.5 }}
-          className="text-[#4A5C6A] mt-2"
-        >
-          @mhiml._
-        </motion.p>
-      </div>
+      </motion.div>
 
       <motion.div
-        initial={{ opacity: 0, y: 10 }}
+        initial={{ opacity: 0, y: 14 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.5, duration: 0.5 }}
-        className="flex flex-col sm:flex-row gap-3 w-full max-w-xs mx-auto"
+        transition={{ duration: 0.44, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
       >
-        <CTAButton onClick={() => window.open("https://ilyasmohaimel.github.io/", "_blank")}>
+        <p className="mb-1.5 text-[0.72rem] font-black uppercase tracking-[0.24em] text-[#253745]">
+          OFFICIAL LINKS
+        </p>
+        <h1
+          id="profile-title"
+          className="font-display text-[clamp(4.25rem,16vw,6rem)] font-black uppercase leading-[0.82] tracking-normal text-[#06141B]"
+        >
+          ILYAS
+          <br />
+          MOHAIMEL
+        </h1>
+        <p className="mt-1.5 text-[0.92rem] font-extrabold tracking-[0.02em] text-[#4A5C6A]">
+          @mhiml._
+        </p>
+      </motion.div>
+
+      <motion.div
+        className="grid grid-cols-1 gap-3 min-[390px]:grid-cols-2"
+        initial={{ opacity: 0, y: 12 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.42, delay: 0.16, ease: [0.22, 1, 0.36, 1] }}
+      >
+        <CTAButton
+          href="https://ilyasmohaimel.github.io/"
+          icon={<ArrowUpRight aria-hidden="true" className="size-4 stroke-[2.5]" />}
+        >
           VISIT PORTFOLIO
         </CTAButton>
-        <CTAButton 
-          variant="outlined"
-          onClick={() => window.open("mailto:ilyasmohaimel@gmail.com", "_blank")}
+        <CTAButton
+          href="mailto:ilyasmohaimel@gmail.com"
+          icon={<Mail aria-hidden="true" className="size-4 stroke-[2.5]" />}
+          variant="secondary"
         >
           EMAIL ME
         </CTAButton>
       </motion.div>
-    </div>
-  );
-};
+    </section>
+  )
+}

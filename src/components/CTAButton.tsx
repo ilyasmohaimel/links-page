@@ -1,36 +1,37 @@
-import { motion } from "framer-motion";
-import React from "react";
+import type { ReactNode } from 'react'
+import { motion } from 'framer-motion'
 
 type CTAButtonProps = {
-  children: React.ReactNode;
-  onClick?: () => void;
-  variant?: "filled" | "outlined";
-  className?: string;
-};
+  href: string
+  children: ReactNode
+  icon: ReactNode
+  variant?: 'primary' | 'secondary'
+}
 
-export const CTAButton: React.FC<CTAButtonProps> = ({
+export default function CTAButton({
+  href,
   children,
-  onClick,
-  variant = "filled",
-  className = "",
-}) => {
-  const baseClasses = "px-6 py-3 rounded-full font-semibold text-sm tracking-wider transition-all";
-  const variantClasses = {
-    filled: "bg-[#11212D] text-white hover:bg-[#253745]",
-    outlined: "border border-[#D5DEE3] text-[#11212D] hover:bg-[#E8EEF1]",
-  };
+  icon,
+  variant = 'primary',
+}: CTAButtonProps) {
+  const baseClass =
+    'group inline-flex min-h-12 items-center justify-center gap-2 rounded-[10px] border px-4 py-3 text-[0.72rem] font-black uppercase tracking-[0.14em] transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#11212D]'
+  const variantClass =
+    variant === 'primary'
+      ? 'border-[#06141B] bg-[#06141B] text-white shadow-[0_12px_26px_rgba(6,20,27,0.16)] hover:bg-[#11212D]'
+      : 'border-[#9FAAAF] bg-white/60 text-[#06141B] hover:border-[#06141B] hover:bg-white'
 
   return (
-    <motion.button
-      whileHover={{ scale: 1.02 }}
-      whileTap={{ scale: 0.98 }}
-      onClick={onClick}
-      className={`${baseClasses} ${variantClasses[variant]} ${className}`}
+    <motion.a
+      href={href}
+      className={`${baseClass} ${variantClass}`}
+      whileHover={{ y: -2 }}
+      whileTap={{ scale: 0.985 }}
     >
-      <div className="flex items-center gap-2 justify-center">
-        {children}
-        {variant === "outlined" && <span>✉️</span>}
-      </div>
-    </motion.button>
-  );
-};
+      <span>{children}</span>
+      <span className="transition-transform duration-200 group-hover:translate-x-0.5">
+        {icon}
+      </span>
+    </motion.a>
+  )
+}
