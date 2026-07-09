@@ -16,8 +16,8 @@ export const CTAButton: React.FC<CTAButtonProps> = ({
 }) => {
   const baseClasses = "px-6 py-3 rounded-full font-semibold text-sm tracking-wider transition-all";
   const variantClasses = {
-    filled: "bg-cta-primary text-white hover:bg-[#253745]",
-    outlined: "border border-border-color text-text-primary hover:bg-[#E8EEF1]",
+    filled: "bg-[#11212D] text-white hover:bg-[#253745]",
+    outlined: "border border-[#D5DEE3] text-[#11212D] hover:bg-[#E8EEF1]",
   };
 
   return (
